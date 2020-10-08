@@ -6,7 +6,9 @@
         <b-col cols="3" class="bg-primary">
           <Sidebar />
         </b-col>
-        <b-col class="bg-warning"></b-col>
+        <b-col cols="9" class="bg-danger">
+          <AppMain />
+        </b-col>
       </b-row>
      </b-container>
   </div>
@@ -15,10 +17,12 @@
 <script>
 import Sidebar from "components/Sidebar";
 import Navbar from "components/Navbar";
+import AppMain from "components/AppMain";
 export default {
   components: {
     Sidebar,
-    Navbar
+    Navbar,
+    AppMain
   },
   data() {
     return {};
