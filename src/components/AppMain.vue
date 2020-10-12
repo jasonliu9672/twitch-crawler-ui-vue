@@ -1,10 +1,10 @@
 <template>
-  <b-container id="app-main" fluid w-100>
-  </b-container>
+
 </template>
 
 <script>
-export default {};
+export default {
+};
 </script>
 
 <style lang="scss" scoped>

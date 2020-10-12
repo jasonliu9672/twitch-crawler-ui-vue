@@ -1,24 +1,49 @@
 <template>
-    <div>
-  <div class="bg-success">
-    <b-button v-b-toggle.sidebar-1 ve>Toggle Sidebar</b-button>
-    <b-sidebar id="sidebar-1" title="Sidebar" width="350px" shadow visible> 
-      <div class="px-3 py-2">
-        <p>
-          Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
-          in, egestas eget quam. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-        </p>
-        <b-img src="https://picsum.photos/500/500/?image=54" fluid thumbnail></b-img>
-      </div>
-    </b-sidebar>
-  </div>
-    </div>
+  <v-navigation-drawer app v-model="isCollapse" dark  src="https://cdn.vuetifyjs.com/images/backgrounds/bg-2.jpg">
+    <v-toolbar flat class="align-center" dense
+  >
+      <v-spacer />
+      <v-toolbar-title>
+        <span class="font-weight-light logo">EECS</span>
+        <span class="font-weight-700 custom-title logo">
+          NSLAB</span
+        ></v-toolbar-title
+      >
+      <v-spacer />
+    </v-toolbar>
+    <v-btn text block large to="/dashboard/crawler"
+      
+      ><v-icon left>mdi-twitch</v-icon><span class="ml-3 menu__item">Crawler</span></v-btn
+    >
+    <v-btn text block large to="/login"
+      ><v-icon left>mdi-database</v-icon
+      ><span class="ml-3 menu__item">Database</span></v-btn
+    >
+    <v-btn text block large to="/dashboard/accounts"
+      ><v-icon left>mdi-account</v-icon
+      ><span class="ml-3 menu__item">Accounts</span></v-btn
+    >
+  </v-navigation-drawer>
 </template>
-<style scoped>
-.router-link-active{
-    opacity :1 ;
-    visibility: visible;
-    border-left-color: #4DB6AC;
-    transition: all 0.25s;
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  computed: {
+    ...mapGetters(["sidebar"]),
+    isCollapse() {
+      console.log(!this.sidebar.opened);
+      return !this.sidebar.opened;
+    }
+  },
+};
+</script>
+<style lang="scss" scoped>
+@import "assets/main.scss";
+.logo{
+  font-size: font(4);
+}
+.menu__item{
+  font-size: font(1);
 }
 </style>

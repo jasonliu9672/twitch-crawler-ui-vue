@@ -1,19 +1,27 @@
 <template>
-  <div id="app">
-    <router-view />
+    <div class="main-background">
+    <router-view/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+<script>
+export default {
+  name: 'App',
 
-}
-html,body,#app{
-      height: 100%;
+  components: {
+  },
+
+  data: () => ({
+    //
+  }),
+};
+</script>
+<style lang="scss">
+body{
+    background: url("assets/images/space.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 </style>

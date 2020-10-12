@@ -1,35 +1,30 @@
 <template>
-  <div>
-    <!-- <nav class="navbar navbar-custom navbar-expand-sm navbar-dark shadow">
-            <b-icon-globe class='ml-1 mt-2 h5 text-white'></b-icon-globe>
-            <a class="ml-2 navbar-brand navbar-brand__logo " href="#">NSLAB</a>
-            <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-                aria-expanded="false" aria-label="Toggle navigation"></button>
-            <div class="collapse navbar-collapse" id="collapsibleNavId">
-            </div>
-        </nav> -->
-    <b-navbar toggleable="sm" class="navbar-custom" type="dark">
-      <b-navbar-toggle target="nav-text-collapse"></b-navbar-toggle>
-      <b-icon-globe class="ml-1 mt-2 h5 text-white"></b-icon-globe>
-      <b-navbar-brand class="ml-2">NSLAB</b-navbar-brand>
-      <b-collapse id="nav-text-collapse" is-nav> </b-collapse>
-      <b-navbar-nav class='ml-auto text-white'> <b-button size="sm">Log Out</b-button> </b-navbar-nav>
-    </b-navbar>
-  </div>
+ <nav>
+   <v-app-bar app light color="mainWhite">
+     <v-app-bar-nav-icon class="grey--text" @click="toggleSideBar"></v-app-bar-nav-icon>
+     <div class="text-uppercase">
+       <span class="font-weight-700 custom-title"> {{this.$route.name}}</span>
+     </div>
+     <v-spacer></v-spacer>
+     <v-btn>
+       <span>Sign Out</span>
+     </v-btn>
+   </v-app-bar>
+ </nav>
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    toggleSideBar() {
+      this.$store.dispatch('app/toggleSideBar')}}
+};
 </script>
 
 <style lang="scss" scoped>
 @import "assets/main.scss";
 @import "assets/font.scss";
-.navbar-custom {
-  background-color: $twitchBlack;
-  .navbar-brand__logo {
-    font-family: SecularOneerererre;
-    font-size: font(5);
-  }
+.custom-title{
+  font-size:font(2);
 }
 </style>

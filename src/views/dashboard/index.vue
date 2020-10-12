@@ -1,28 +1,23 @@
 <template>
-  <div class='main-div'>
+  <v-app>
+    <AlertMessage />
     <Navbar />
-    <b-container class='bg-success h-100' fluid>
-      <b-row align-v="stretch" class="h-100">
-        <b-col cols="3" class="bg-primary">
-          <Sidebar />
-        </b-col>
-        <b-col cols="9" class="bg-danger">
-          <AppMain />
-        </b-col>
-      </b-row>
-     </b-container>
-  </div>
+    <Sidebar />
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
 </template>
 
 <script>
 import Sidebar from "components/Sidebar";
 import Navbar from "components/Navbar";
-import AppMain from "components/AppMain";
+import AlertMessage from "components/AlertMessage";
 export default {
   components: {
     Sidebar,
     Navbar,
-    AppMain
+    AlertMessage
   },
   data() {
     return {};
@@ -30,8 +25,8 @@ export default {
 };
 </script>
 <style lang="scss">
-.main-div{
+.main-div {
   min-height: 100%;
-  height:100%;
+  height: 100%;
 }
 </style>
