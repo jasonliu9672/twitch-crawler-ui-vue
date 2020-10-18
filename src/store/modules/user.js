@@ -1,11 +1,9 @@
 import Cookies from 'js-cookie'
 import { userLogin } from "@/api/user.js";
+import { deleteAuthHeader } from "@/utils/request"
 const state = {
-    status: true,
-    state: {
-        status: '',
-        token: Cookies.get('token') || '',
-    }
+    status: '',
+    token: Cookies.get('token') || '',
 }
 const mutations = {
     auth_request(state) {
@@ -23,6 +21,7 @@ const mutations = {
     },
     logout(state) {
         state.status = ''
+        state.token = ''
     },
 }
 
@@ -32,11 +31,15 @@ const actions = {
             commit('auth_request')
             userLogin(user.username, user.password)
                 .then(res => {
-                    const token = res.data.token;
-                    if (token) {
-                        Cookies.set('token', token)
-                        // axios.defaults.headers.common['Authorization'] = token;
-                        commit('auth_success', { token });
+                    if (res.success) {
+                        const token = res.token;
+                        if (token) {
+                            Cookies.set('token', token)
+                            commit('auth_success', { token });
+                        }
+                        else {
+                            commit('auth_fail');
+                        }
                     }
                     else {
                         commit('auth_fail');
@@ -52,9 +55,10 @@ const actions = {
     },
     logout({ commit }) {
         return new Promise((resolve) => {
+            console.log('logout')
             commit('logout')
             Cookies.remove('token');
-            // delete axios.defaults.headers.common['Authorization']
+            deleteAuthHeader()
             resolve()
         })
     },

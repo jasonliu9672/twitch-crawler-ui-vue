@@ -15,3 +15,17 @@ new Vue({
   vuetify,
   render: h => h(App)
 }).$mount("#app")
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (store.getters.isLoggedIn) {
+      next()
+    }
+    else {
+      next('login')
+    }
+  }
+  else {
+    next()
+  }
+});

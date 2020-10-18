@@ -14,12 +14,24 @@ const routes = [
 
     component: () =>
       import("views/dashboard/index.vue"),
+    meta: { requiresAuth: true },
     children: [
+      {
+        path:'',
+        component: () =>
+          import("views/dashboard/home/index.vue")
+      },
       {
         path: 'crawler',
         name: 'Crawler',
         component: () =>
           import("views/dashboard/crawler/index.vue")
+      },
+      {
+        path: 'database',
+        name: 'Database',
+        component: () =>
+          import("views/dashboard/database/index.vue")
       },
       {
         path: 'accounts',

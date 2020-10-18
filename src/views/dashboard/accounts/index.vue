@@ -7,7 +7,7 @@
           <thead>
             <tr>
               <th class="text-left">User</th>
-              <th class="text-left">Password</th>
+              <th class="text-left">Hashed Password</th>
               <th class="text-left">Options</th>
             </tr>
           </thead>
@@ -36,7 +36,7 @@
                       <v-col cols="12">
                         <v-text-field
                           label="Username*"
-                          required
+                          :rules="[rules.required]"
                           v-model="newUser.username"
                         ></v-text-field>
                       </v-col>
@@ -45,7 +45,7 @@
                           v-model="newUser.password"
                           label="Password*"
                           type="password"
-                          required
+                          :rules="[rules.required, rules.min]"
                         ></v-text-field>
                       </v-col>
                     </v-row>
@@ -57,7 +57,13 @@
                   <v-btn color="blue darken-1" text @click="dialog = false"
                     >Close</v-btn
                   >
-                  <v-btn color="blue darken-1" text @click="dialog = false; registerUser()"
+                  <v-btn
+                    color="blue darken-1"
+                    text
+                    @click="
+                      dialog = false;
+                      registerUser();
+                    "
                     >Register</v-btn
                   >
                 </v-card-actions>
@@ -79,6 +85,10 @@ export default {
       newUser: {
         username: "",
         password: ""
+      },
+      rules: {
+        required: value => !!value || "Required.",
+        min: v => v.length >= 8 || "Min 8 characters"
       }
     };
   },
@@ -89,9 +99,18 @@ export default {
       });
     },
     registerUser() {
-      userRegister(this.newUser).then(response => {
-        console.log(response);
-      });
+      userRegister(this.newUser)
+        .then(response => {
+          console.log(response);
+          if (response.success) {
+            this.$bus.$emit("message:push", "Register Success", "success");
+          } else {
+            this.$bus.$emit("message:push", response.error, "error");
+          }
+        })
+        .then(() => {
+          this.fetchAllUsers();
+        });
     }
   },
   created() {

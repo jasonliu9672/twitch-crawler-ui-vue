@@ -149,6 +149,7 @@ export default {
     fetchProbeList() {
       this.listLoading = true;
       getProbeList().then(response => {
+        console.log(response)
         this.probeList = response.status.aliveContainers.map(probe => {
           return { ...probe, closeLoading: false };
         });
